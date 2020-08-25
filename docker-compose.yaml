@@ -4,10 +4,10 @@ services:
     web:
         container_name: "cars_web"
         build:
-            context: .
-            dockerfile: dockerfile.dev
+            context: ./cars
+            dockerfile: Dockerfile.dev
         volumes:
-            - .:/code
+            - ./cars:/code
         ports:
             - "8000:8000"
         env_file:
@@ -21,4 +21,8 @@ services:
             - "5432"
         env_file:
             - ./postgres.env
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
         
+volumes:
+    postgres-data:

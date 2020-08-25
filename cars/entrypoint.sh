@@ -1,5 +1,5 @@
 #!/bin/sh
-FILE=/home/setup_done
+FILE=/code/.setup_done
 
 wait_for_db() {
   while ! nc -z $POSTGRES_DB_HOST:$POSTGRES_DB_PORT; do
@@ -19,4 +19,4 @@ if [ ! -f $FILE ]; then
   setup_db
 fi
 
-python /code/manage.py runserver 0.0.0.0:8000
+python /code/manage.py runserver 0.0.0.0:$PORT

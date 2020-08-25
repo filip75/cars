@@ -38,6 +38,7 @@ class CreateCarRateView(CreateAPIView):
 
 class TopCarsSerializer(serializers.ModelSerializer):
     votes = serializers.IntegerField()
+
     class Meta:
         model = Car
         fields = ["id", "make", "model", "votes"]
