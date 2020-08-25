@@ -1,6 +1,6 @@
-import requests
 from django.core.cache import cache
-import logging
+
+import requests
 
 URL = "https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/{}?format=json"
 MODEL_NAME_FIELD = "Model_Name"

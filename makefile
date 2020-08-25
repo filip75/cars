@@ -14,6 +14,13 @@ run:
 	docker-compose up -d
 
 test:
-	docker run --entrypoint /code/manage.py --env-file django.env --env-file postgres.env cars_web test 
+	docker run \
+	--entrypoint /code/manage.py \
+	--env-file django.env \
+	--env-file postgres.env \
+	-e DJANGO_SETTINGS_MODULE=cars.settings.test \
+	-v $(shell pwd)/cars:/code \
+	cars_web \
+	test 
 
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-FILE=/code/.setup_done
+FILE=/home/.setup_done
 
 wait_for_db() {
   while ! nc -z $POSTGRES_DB_HOST:$POSTGRES_DB_PORT; do
@@ -10,7 +10,7 @@ wait_for_db() {
 
 setup_db() {
   wait_for_db
-  python /code/manage.py migrate
+  python manage.py migrate
   echo "setup_db done"
   touch $FILE
 }
@@ -19,4 +19,9 @@ if [ ! -f $FILE ]; then
   setup_db
 fi
 
-python /code/manage.py runserver 0.0.0.0:$PORT
+if [ $# -g 0 ]; then
+  exec $@
+else
+  python manage.py collectstatic --no-input --clear
+  gunicorn cars.wsgi:application --bind 0.0.0.0:$PORT
+fi
