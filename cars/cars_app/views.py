@@ -1,10 +1,10 @@
 from django.db.models import Avg, Count, Func
-
-from cars_app.models import Car, CarRate
-from cars_app.vehicle_api import vehicle_exists
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import CreateAPIView, ListAPIView, ListCreateAPIView
+
+from cars_app.models import Car, CarRate
+from cars_app.vehicle_api import vehicle_exists
 
 
 class CarSerializer(serializers.ModelSerializer):
