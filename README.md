@@ -24,7 +24,9 @@ After application has been build run `make test`
 
 ## Deployment
 
-Application is deployed here https://cars12345678.herokuapp.com/cars/
+Application is deployed here
+
+https://cars12345678.herokuapp.com/cars/
 
 https://cars12345678.herokuapp.com/rate/
 
