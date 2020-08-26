@@ -10,3 +10,5 @@ DATABASES = {
         "PORT": os.environ["POSTGRES_DB_PORT"],
     }
 }
+
+CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache",}}

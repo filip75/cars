@@ -1,9 +1,10 @@
-from rest_framework.generics import ListCreateAPIView, CreateAPIView, ListAPIView
-from rest_framework import serializers
+from django.db.models import Avg, Count, Func
+
 from cars_app.models import Car, CarRate
-from django.db.models import Avg, Count
 from cars_app.vehicle_api import vehicle_exists
+from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+from rest_framework.generics import CreateAPIView, ListAPIView, ListCreateAPIView
 
 
 class CarSerializer(serializers.ModelSerializer):
@@ -20,9 +21,14 @@ class CarSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "avarage_rate"]
 
 
+class Round(Func):
+    function = "ROUND"
+    arity = 2
+
+
 class ListCreateCarsView(ListCreateAPIView):
     serializer_class = CarSerializer
-    queryset = Car.objects.annotate(avarage_rate=Avg("rates__value")).all()
+    queryset = Car.objects.annotate(avarage_rate=Round(Avg("rates__value"), 2)).all()
 
 
 class RateSerializer(serializers.ModelSerializer):
