@@ -19,7 +19,7 @@ if [ ! -f $FILE ]; then
   setup_db
 fi
 
-if [ $# -g 0 ]; then
+if [ $# -gt 0 ]; then
   exec $@
 else
   python manage.py collectstatic --no-input --clear
